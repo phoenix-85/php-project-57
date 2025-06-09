@@ -1,0 +1,18 @@
+FROM php:8.2-cli
+
+RUN apt-get update && apt-get install -y libzip-dev libpq-dev
+RUN docker-php-ext-install zip pdo pdo_pgsql
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+
+WORKDIR /app
+
+COPY . .
+RUN composer install
+RUN npm ci
+RUN npm run build
+
+CMD ["bash", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
