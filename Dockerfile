@@ -5,8 +5,11 @@ RUN docker-php-ext-install zip pdo pdo_pgsql
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
+#RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+#RUN apt-get install -y nodejs
+
+COPY --from=node:22 /usr/local/bin /usr/local/bin
+COPY --from=node:22 /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 WORKDIR /app
 
