@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
 
 Route::get('/dashboard', function () {
@@ -16,5 +17,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('task_statuses', TaskStatusController::class)->only('index');
+Route::middleware('auth')->group(function () {
+    Route::resource('task_statuses', TaskStatusController::class)->except(['index', 'show']);
+});
+
+Route::get('tasks', function () {})->name('tasks.index');
+Route::get('labels', function () {})->name('labels.index');
 
 require __DIR__.'/auth.php';
