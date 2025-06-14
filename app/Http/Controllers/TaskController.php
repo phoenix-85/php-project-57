@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -31,7 +32,8 @@ class TaskController extends Controller
         $task = Task::make();
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('task.create', compact('task',  'taskStatuses', 'users'));
+        $labels = Label::pluck('name', 'id');
+        return view('task.create', compact('task',  'taskStatuses', 'users', 'labels'));
     }
 
     public function edit(Task $task)
@@ -39,7 +41,8 @@ class TaskController extends Controller
         $this->authorize('update', $task);
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('task.edit', compact('task', 'taskStatuses', 'users'));
+        $labels = Label::pluck('name', 'id');
+        return view('task.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
     public function store(TaskRequest $request)
     {
@@ -48,6 +51,7 @@ class TaskController extends Controller
         $task->created_by_id = $request->user()->id;
         $task->assigned_to_id = $task->assigned_to_id ?? $request->user()->id;
         $task->save();
+        $task->labels()->saveMany(Label::findMany($request->labels));
         return to_route('tasks.index')->with('status', 'Задача успешно создана');
     }
 
@@ -55,6 +59,7 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->validated());
+        $task->labels()->sync($request->labels);
         return to_route('tasks.index')->with('status', 'Задача успешно обновлена');
     }
 

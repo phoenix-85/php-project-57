@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskStatusRequest;
 use App\Models\TaskStatus;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TaskStatusController extends Controller
@@ -47,7 +48,11 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         $this->authorize('delete', $taskStatus);
-        $status = $taskStatus->delete() ? 'Статус успешно удален' : 'Не удалось удалить статус';
-        return to_route('task_statuses.index')->with('status', $status);
+        try {
+            $taskStatus->delete();
+        } catch (QueryException) {
+            return to_route('task_statuses.index')->with('status', 'Не удалось удалить статус');
+        }
+        return to_route('task_statuses.index')->with('status', 'Статус успешно удален');
     }
 }

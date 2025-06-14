@@ -10,17 +10,17 @@
 
 <div>
     {{ html()->label('Статус', 'status_id') }}
-    {{ html()->select('status_id', $taskStatuses, $task->status?->id)->prependChild(html()->option()->selected('selected')) }}
+    {{ html()->select('status_id', $taskStatuses, $task->status?->id)->prependChild(html()->option()->selected()) }}
 </div>
 
 <div>
     {{ html()->label('Исполнитель', 'assigned_to_id') }}
-    {{ html()->select('assigned_to_id', $users, $task->assignedTo?->id)->prependChild(html()->option()->selected('selected')) }}
+    {{ html()->select('assigned_to_id', $users, $task->assignedTo?->id)->prependChild(html()->option()->selected()) }}
 </div>
 
 <div>
-    {{ html()->label('Метки', 'labels[]') }}
-    {{ html()->multiselect('labels[]', [], []) }}
+    {{ html()->label('Метки', 'labels') }}
+    {{ html()->multiselect('labels', $labels) }}
 </div>
 
 <div>
