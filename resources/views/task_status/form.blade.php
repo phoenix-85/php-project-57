@@ -1,4 +1,12 @@
-{{ html()->label('Имя', 'name') }}
-{{ html()->input('text', 'name') }}
-{{ html()->submit($action) }}
+<div>
+    {{ html()->label('Имя', 'name') }}
+    {{ html()->text('name') }}
+</div>
+
+<div>
+    {{ html()->submit($action) }}
+</div>
+
+
+
 

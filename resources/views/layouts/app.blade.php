@@ -15,9 +15,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        @if (session('status'))
+            <div>{{ session('status') }}</div>
+        @endif
         <div id="app">
             @include('header')
-        <!-- Page Content -->
             <section>
                 @yield('content')
             </section>

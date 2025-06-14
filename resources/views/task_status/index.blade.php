@@ -2,12 +2,11 @@
 
 @section('content')
     <h1>Статусы</h1>
-    @auth
+    @can('create', \App\Models\TaskStatus::class)
         <div>
             <a href="{{ route('task_statuses.create') }}">Создать статус</a>
         </div>
-    @endauth
-
+    @endcan
     <table>
         <thead>
         <tr>

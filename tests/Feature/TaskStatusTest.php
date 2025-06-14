@@ -17,7 +17,7 @@ class TaskStatusTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/task_statuses/create');
+            ->get(route('task_statuses.create'));
 
         $response
             ->assertOk();
