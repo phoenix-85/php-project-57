@@ -4,7 +4,10 @@ use App\Http\Controllers\LabelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskStatusController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+
+Carbon::setToStringFormat('d.m.Y');
 
 Route::get('/', function () {
     return view('main');
