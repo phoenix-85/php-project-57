@@ -1,12 +1,15 @@
+@use('\App\Models\Task')
+
 @extends('layouts.app')
 
 @section('content')
-    <h1>Статусы</h1>
-    @can('create', \App\Models\Task::class)
+    <h1 class="mb-5">Задачи</h1>
+    @can('create', Task::class)
         <div>
             <a href="{{ route('tasks.create') }}">Создать задачу</a>
         </div>
     @endcan
+    @include('task.filter')
     <table>
         <thead>
         <tr>
@@ -48,4 +51,5 @@
             </tr>
         @endforeach
     </table>
+    {{ $tasks->links() }}
 @endsection

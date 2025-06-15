@@ -10,12 +10,12 @@ class LabelPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, Label $label): bool
+    public function view(?User $user, Label $label): bool
     {
         return true;
     }

@@ -10,12 +10,12 @@
 
 <div>
     {{ html()->label('Статус', 'status_id') }}
-    {{ html()->select('status_id', $taskStatuses, $task->status?->id)->prependChild(html()->option()->selected()) }}
+    {{ html()->select('status_id', $taskStatuses, $task->status?->id)->placeholder('') }}
 </div>
 
 <div>
     {{ html()->label('Исполнитель', 'assigned_to_id') }}
-    {{ html()->select('assigned_to_id', $users, $task->assignedTo?->id)->prependChild(html()->option()->selected()) }}
+    {{ html()->select('assigned_to_id', $users, $task->assignedTo?->id)->placeholder('') }}
 </div>
 
 <div>
