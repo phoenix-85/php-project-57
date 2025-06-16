@@ -4,18 +4,9 @@ use App\Http\Controllers\LabelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskStatusController;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
-Carbon::setToStringFormat('d.m.Y');
-
-Route::get('/', function () {
-    return view('main');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('/', 'main')->name('main');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

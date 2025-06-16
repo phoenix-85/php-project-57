@@ -19,7 +19,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny',Task::class);
-        $inputFilter = $request->input('filter') ?? [];
+        $filter = $request->input('filter') ?? [];
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
@@ -30,7 +30,7 @@ class TaskController extends Controller
             ->appends(request()->query());
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('task.index', compact('inputFilter', 'tasks', 'statuses', 'users'));
+        return view('task.index', compact('filter', 'tasks', 'statuses', 'users'));
     }
 
     public function show(Task $task)

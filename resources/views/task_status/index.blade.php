@@ -1,39 +1,17 @@
+@use('App\Models\TaskStatus')
 @extends('layouts.app')
 
 @section('content')
     <h1>Статусы</h1>
-    @can('create', \App\Models\TaskStatus::class)
+    @can('create', TaskStatus::class)
         <div>
-            <a href="{{ route('task_statuses.create') }}">Создать статус</a>
+            <a
+                href="{{ route('task_statuses.create') }}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+                Создать статус
+            </a>
         </div>
     @endcan
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Дата создания</th>
-            @auth
-                <th>Действия</th>
-            @endauth
-        </tr>
-        </thead>
-        @foreach($taskStatuses as $taskStatus)
-            <tr>
-                <td>{{ $taskStatus->id }}</td>
-                <td>{{ $taskStatus->name }}</td>
-                <td>{{ $taskStatus->created_at }}</td>
-                @auth
-                    <td>
-                        <form method="POST" action="{{ route('task_statuses.destroy', $taskStatus) }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit">Удалить</button>
-                        </form>
-                        <a href="{{ route('task_statuses.edit', $taskStatus) }}">Изменить</a>
-                    </td>
-                @endauth
-            </tr>
-        @endforeach
-    </table>
+    @include('task_status.partials.list')
 @endsection

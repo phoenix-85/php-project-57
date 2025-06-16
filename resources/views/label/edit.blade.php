@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Изменение метки</h1>
+    <h1 class="mb-5">Изменение метки</h1>
 
-    {{ html()->modelForm($label, 'PATCH', route('labels.update', $label))->open() }}
-        @include('label.form', ['action' => 'Обновить'])
+    {{ html()->modelForm($label, 'PATCH', route('labels.update', $label))->class('w-50')->open() }}
+    @include('label.partials.form', ['action' => 'Обновить'])
     {{ html()->closeModelForm() }}
 @endsection
