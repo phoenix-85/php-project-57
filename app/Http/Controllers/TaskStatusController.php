@@ -15,20 +15,20 @@ class TaskStatusController extends Controller
     {
         $this->authorize('viewAny', TaskStatus::class);
         $taskStatuses = TaskStatus::all();
-        return view('task_status.index', compact('taskStatuses'));
+        return view('sections.task_status.index', compact('taskStatuses'));
     }
 
     public function create()
     {
         $this->authorize('create', TaskStatus::class);
         $taskStatus = TaskStatus::make();
-        return view('task_status.create', compact('taskStatus'));
+        return view('sections.task_status.create', compact('taskStatus'));
     }
 
     public function edit(TaskStatus $taskStatus)
     {
         $this->authorize('update', $taskStatus);
-        return view('task_status.edit', compact('taskStatus'));
+        return view('sections.task_status.edit', compact('taskStatus'));
     }
 
     public function store(TaskStatusRequest $request)

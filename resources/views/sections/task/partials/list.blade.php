@@ -2,13 +2,13 @@
     <thead class="border-b-2 border-solid border-black text-left">
     <tr>
         <th>ID</th>
-        <th>Статус</th>
-        <th>Имя</th>
-        <th>Автор</th>
-        <th>Исполнитель</th>
-        <th>Дата создания</th>
+        <th>{{ __('Status') }}</th>
+        <th>{{ __('Name') }}</th>
+        <th>{{ __('Author') }}</th>
+        <th>{{ __('Executor') }}</th>
+        <th>{{ __('Date of creation') }}</th>
         @auth
-            <th>Действия</th>
+            <th>{{ __('Actions') }}</th>
         @endauth
     </tr>
     </thead>
@@ -37,7 +37,7 @@
                                 type="submit"
                                 class="text-red-600 hover:text-red-900"
                             >
-                                Удалить
+                                {{ __('Delete') }}
                             </button>
                         </form>
                     @endcan
@@ -45,7 +45,7 @@
                         href="{{ route('tasks.edit', $task) }}"
                         class="text-blue-600 hover:text-blue-900"
                     >
-                        Изменить
+                        {{ __('Edit') }}
                     </a>
                 </td>
             @endauth

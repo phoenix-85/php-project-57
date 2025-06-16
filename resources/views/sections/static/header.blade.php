@@ -8,21 +8,32 @@
                 <span
                     class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
                 >
-                    Менеджер задач
+                    {{ __('Task manager') }}
                 </span>
             </a>
             <div class="flex items-center lg:order-2">
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Выход</button>
+                        <button
+                            type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            {{ __('Logout') }}
+                        </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Вход
+                    <a
+                        href="{{ route('login') }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        {{ __('Log in') }}
                     </a>
-                    <a href="{{ route('register') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
-                        Регистрация
+                    <a
+                        href="{{ route('register') }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                    >
+                        {{ __('Register') }}
                     </a>
                 @endauth
             </div>
@@ -33,7 +44,7 @@
                             href="{{ route('tasks.index') }}"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0"
                         >
-                            Задачи
+                            {{ __('Tasks') }}
                         </a>
                     </li>
                     <li>
@@ -41,7 +52,7 @@
                             href="{{ route('task_statuses.index') }}"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0"
                         >
-                            Статусы
+                            {{ __('Statuses') }}
                         </a>
                     </li>
                     <li>
@@ -49,7 +60,7 @@
                             href="{{ route('labels.index') }}"
                             class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0"
                         >
-                            Метки
+                            {{ __('Labels') }}
                         </a>
                     </li>
                 </ul>

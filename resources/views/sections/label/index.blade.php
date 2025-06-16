@@ -2,16 +2,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-5">Метки</h1>
+    <div>
+        <h1 class="mb-5">{{ __('Labels') }}</h1>
+    </div>
     @can('create', Label::class)
         <div>
             <a
                 href="{{ route('labels.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-                Создать метку
+                {{ __('Create label') }}
             </a>
         </div>
     @endcan
-    @include('label.partials.list')
+    @include('sections.label.partials.list')
 @endsection

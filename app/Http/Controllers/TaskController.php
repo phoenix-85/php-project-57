@@ -30,13 +30,13 @@ class TaskController extends Controller
             ->appends(request()->query());
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('task.index', compact('filter', 'tasks', 'statuses', 'users'));
+        return view('sections.task.index', compact('filter', 'tasks', 'statuses', 'users'));
     }
 
     public function show(Task $task)
     {
         $this->authorize('view', $task);
-        return view('task.show', compact('task'));
+        return view('sections.task.show', compact('task'));
     }
 
     public function create()
@@ -46,7 +46,7 @@ class TaskController extends Controller
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
-        return view('task.create', compact('task',  'taskStatuses', 'users', 'labels'));
+        return view('sections.task.create', compact('task',  'taskStatuses', 'users', 'labels'));
     }
 
     public function edit(Task $task)
@@ -55,7 +55,7 @@ class TaskController extends Controller
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
-        return view('task.edit', compact('task', 'taskStatuses', 'users', 'labels'));
+        return view('sections.task.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
     public function store(TaskRequest $request)
     {

@@ -15,20 +15,20 @@ class LabelController extends Controller
     {
         $this->authorize('viewAny', Label::class);
         $labels = Label::all();
-        return view('label.index', compact('labels'));
+        return view('sections.label.index', compact('labels'));
     }
 
     public function create()
     {
         $this->authorize('create', Label::class);
         $label = Label::make();
-        return view('label.create', compact('label'));
+        return view('sections.label.create', compact('label'));
     }
 
     public function edit(Label $label)
     {
         $this->authorize('update', $label);
-        return view('label.edit', compact('label'));
+        return view('sections.label.edit', compact('label'));
     }
 
     public function store(LabelRequest $request)
