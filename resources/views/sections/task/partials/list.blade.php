@@ -30,16 +30,31 @@
             @auth
                 <td>
                     @can('delete', $task)
-                        <form method="POST" action="{{ route('tasks.destroy', $task) }}">
-                            @method('DELETE')
-                            @csrf
-                            <button
-                                type="submit"
-                                class="text-red-600 hover:text-red-900"
-                            >
-                                {{ __('Delete') }}
-                            </button>
-                        </form>
+                        <button
+                            type="button"
+                            onclick="window.confirmDelete.showModal()"
+                            class="text-red-600 hover:text-red-900"
+                        >
+                            {{__('Delete')}}
+                        </button>
+                        <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
+                            <h2 class="font-semibold">Удаление "{{ $task->name }}"</h2>
+                            <p class="mt-1">Вы действительно хотите удалить задачу?</p>
+                            <div class="flex justify-center mt-4">
+                                <x-secondary-button
+                                    onclick="window.confirmDelete.close()"
+                                >
+                                    {{ __('Cancel') }}
+                                </x-secondary-button>
+                                <form method="POST" action="{{ route('tasks.destroy', $task) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <x-primary-button class="ms-3">
+                                        {{ __('Delete') }}
+                                    </x-primary-button>
+                                </form>
+                            </div>
+                        </dialog>
                     @endcan
                     <a
                         href="{{ route('tasks.edit', $task) }}"
