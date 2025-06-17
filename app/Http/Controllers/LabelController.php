@@ -34,8 +34,10 @@ class LabelController extends Controller
     public function store(LabelRequest $request)
     {
         $this->authorize('create', Label::class);
-        Label::create($request->validated());
-        return to_route('labels.index')->with('status', 'Метка успешно создана');
+        $label = Label::make($request->validated());
+        $label->description = $label->description ?? '';
+        $label->save();
+        return to_route('labels.index')->with('message', 'Метка успешно создана');
     }
 
 
@@ -43,7 +45,7 @@ class LabelController extends Controller
     {
         $this->authorize('update', $label);
         $label->update($request->validated());
-        return to_route('labels.index')->with('status', 'Метка успешно обновлена');
+        return to_route('labels.index')->with('message', 'Метка успешно обновлена');
     }
 
     public function destroy(Label $label)
@@ -52,8 +54,8 @@ class LabelController extends Controller
         try {
             $label->delete();
         } catch (QueryException) {
-            return to_route('labels.index')->with('status', 'Не удалось удалить метку');
+            return to_route('labels.index')->with('message', 'Не удалось удалить метку');
         }
-        return to_route('labels.index')->with('status', 'Метка успешно удалена');
+        return to_route('labels.index')->with('message', 'Метка успешно удалена');
     }
 }

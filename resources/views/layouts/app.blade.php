@@ -15,13 +15,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        @if(session('status'))
-            <div>{{ session('status') }}</div>
-        @endif
         <div id="app">
             @include('sections.static.header')
             <section>
                 <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 lg:py-16 lg:grid-cols-12 lg:pt-28 xl:gap-0">
+                    @if(session('message'))
+                        <div>{{ session('message') }}</div>
+                    @endif
                     <div class="grid col-span-full">
                         @yield('content')
                     </div>

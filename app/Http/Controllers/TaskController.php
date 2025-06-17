@@ -64,8 +64,8 @@ class TaskController extends Controller
         $task->created_by_id = $request->user()->id;
         $task->assigned_to_id = $task->assigned_to_id ?? $request->user()->id;
         $task->save();
-        $task->labels()->saveMany(Label::findMany($request->labels));
-        return to_route('tasks.index')->with('status', 'Задача успешно создана');
+        $task->labels()->sync($request->labels);
+        return to_route('tasks.index')->with('message', 'Задача успешно создана');
     }
 
     public function update(TaskRequest $request, Task $task)
@@ -73,13 +73,13 @@ class TaskController extends Controller
         $this->authorize('update', $task);
         $task->update($request->validated());
         $task->labels()->sync($request->labels);
-        return to_route('tasks.index')->with('status', 'Задача успешно обновлена');
+        return to_route('tasks.index')->with('message', 'Задача успешно обновлена');
     }
 
     public function destroy(Task $task)
     {
         $this->authorize('delete', $task);
         $task->delete();
-        return to_route('tasks.index')->with('status', 'Задача успешно удалена');
+        return to_route('tasks.index')->with('message', 'Задача успешно удалена');
     }
 }

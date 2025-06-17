@@ -98,7 +98,7 @@ class TaskTest extends TestCase
             ]);
 
         $response->assertRedirect(route('tasks.index'));
-        $response->assertSessionHas('status', 'Задача успешно создана');
+        $response->assertSessionHas('message', 'Задача успешно создана');
 
         $response = $this->get(route('tasks.index'));
 
@@ -118,7 +118,7 @@ class TaskTest extends TestCase
             ]);
 
         $response->assertRedirect(route('tasks.index'));
-        $response->assertSessionHas('status', 'Задача успешно обновлена');
+        $response->assertSessionHas('message', 'Задача успешно обновлена');
 
         $response = $this->get(route('tasks.index'));
 

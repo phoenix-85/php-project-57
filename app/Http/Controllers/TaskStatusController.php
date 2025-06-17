@@ -35,14 +35,14 @@ class TaskStatusController extends Controller
     {
         $this->authorize('create', TaskStatus::class);
         TaskStatus::create($request->validated());
-        return to_route('task_statuses.index')->with('status', 'Статус успешно создан');
+        return to_route('task_statuses.index')->with('message', 'Статус успешно создан');
     }
 
     public function update(TaskStatusRequest $request, TaskStatus $taskStatus)
     {
         $this->authorize('update', $taskStatus);
         $taskStatus->update($request->validated());
-        return to_route('task_statuses.index')->with('status', 'Статус успешно обновлен');
+        return to_route('task_statuses.index')->with('message', 'Статус успешно обновлен');
     }
 
     public function destroy(TaskStatus $taskStatus)
@@ -51,8 +51,8 @@ class TaskStatusController extends Controller
         try {
             $taskStatus->delete();
         } catch (QueryException) {
-            return to_route('task_statuses.index')->with('status', 'Не удалось удалить статус');
+            return to_route('task_statuses.index')->with('message', 'Не удалось удалить статус');
         }
-        return to_route('task_statuses.index')->with('status', 'Статус успешно удален');
+        return to_route('task_statuses.index')->with('message', 'Статус успешно удален');
     }
 }
