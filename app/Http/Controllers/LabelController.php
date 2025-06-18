@@ -45,7 +45,7 @@ class LabelController extends Controller
     {
         $this->authorize('update', $label);
         $label->update($request->validated());
-        return to_route('labels.index')->with('message', 'Метка успешно обновлена');
+        return to_route('labels.index')->with('message', 'Метка успешно изменена');
     }
 
     public function destroy(Label $label)

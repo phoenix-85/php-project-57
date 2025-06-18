@@ -42,7 +42,7 @@ class TaskStatusController extends Controller
     {
         $this->authorize('update', $taskStatus);
         $taskStatus->update($request->validated());
-        return to_route('task_statuses.index')->with('message', 'Статус успешно обновлен');
+        return to_route('task_statuses.index')->with('message', 'Статус успешно изменён');
     }
 
     public function destroy(TaskStatus $taskStatus)

@@ -73,7 +73,7 @@ class TaskController extends Controller
         $this->authorize('update', $task);
         $task->update($request->validated());
         $task->labels()->sync($request->labels);
-        return to_route('tasks.index')->with('message', 'Задача успешно обновлена');
+        return to_route('tasks.index')->with('message', 'Задача успешно изменена');
     }
 
     public function destroy(Task $task)
