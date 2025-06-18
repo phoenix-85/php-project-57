@@ -53,6 +53,6 @@ class TaskStatusController extends Controller
         } catch (QueryException) {
             return to_route('task_statuses.index')->with('message', 'Не удалось удалить статус');
         }
-        return to_route('task_statuses.index')->with('message', 'Статус успешно удален');
+        return to_route('task_statuses.index')->with('message', 'Статус успешно удалён');
     }
 }
