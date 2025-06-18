@@ -20,17 +20,17 @@
                 <td>
                     <a
                         href="{{ route('labels.destroy', $label) }}"
-                        onclick="event.preventDefault(); window.confirmDelete.showModal()"
+                        onclick="event.preventDefault(); window.confirmDeleteLabel.showModal()"
                         class="text-red-600 hover:text-red-900"
                     >
                         {{__('Delete')}}
                     </a>
-                    <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
+                    <dialog id="confirmDeleteLabel" class="py-4 px-4 rounded shadow-sm">
                         <h2 class="font-semibold">Удаление "{{ $label->name }}"</h2>
                         <p class="mt-1">Вы действительно хотите удалить метку?</p>
                         <div class="flex justify-center mt-4">
                             <x-secondary-button
-                                onclick="window.confirmDelete.close()"
+                                onclick="window.confirmDeleteLabel.close()"
                             >
                                 {{ __('Cancel') }}
                             </x-secondary-button>

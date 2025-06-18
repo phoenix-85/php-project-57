@@ -193,6 +193,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'Пароль'
+    ],
 
 ];
