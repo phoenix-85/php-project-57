@@ -37,7 +37,7 @@
                         >
                             {{__('Delete')}}
                         </a>
-                        <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
+                        <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm" role="alertdialog">
                             <h2 class="font-semibold">Удаление "{{ $task->name }}"</h2>
                             <p class="mt-1">Вы действительно хотите удалить задачу?</p>
                             <div class="flex justify-center mt-4">
@@ -49,7 +49,7 @@
                                     >
                                         {{ __('Cancel') }}
                                     </x-secondary-button>
-                                    <x-primary-button class="ms-3" autofocus>
+                                    <x-primary-button class="ms-3" value="confirm">
                                         {{ __('OK') }}
                                     </x-primary-button>
                                 </form>
