@@ -9,7 +9,7 @@ class LabelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => ['required', 'string'],
+            'name'        => ['required', 'string', 'unique:labels,name'],
             'description' => ['nullable', 'string'],
         ];
     }
