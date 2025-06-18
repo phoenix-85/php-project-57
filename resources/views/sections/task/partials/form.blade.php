@@ -1,28 +1,48 @@
 <div class="flex flex-col">
+
+    <!-- Name -->
     <div class="mt-2">
         {{ html()->label(__('Name'), 'name') }}
     </div>
     <div>
         {{ html()->text('name')->class(['rounded', 'border-gray-300', 'w-1/3']) }}
     </div>
+    @error('name')
+    <div class="text-red-600">
+        {{ $message }}
+    </div>
+    @enderror
+
+    <!-- Description -->
     <div class="mt-2">
         {{ html()->label(__('Description'), 'description') }}
     </div>
     <div>
         {{ html()->textarea('description')->class(['rounded', 'border-gray-300', 'w-1/3', 'h-32']) }}
     </div>
+
+    <!-- Status -->
     <div class="mt-2">
         {{ html()->label(__('Status'), 'status_id') }}
     </div>
     <div>
         {{ html()->select('status_id', $taskStatuses, $task->status?->id)->class(['rounded', 'border-gray-300', 'w-1/3'])->placeholder('') }}
     </div>
+    @error('status_id')
+    <div class="text-red-600">
+        {{ $message }}
+    </div>
+    @enderror
+
+    <!-- Executor -->
     <div class="mt-2">
         {{ html()->label(__('Executor'), 'assigned_to_id') }}
     </div>
     <div>
         {{ html()->select('assigned_to_id', $users, $task->assignedTo?->id)->class(['rounded', 'border-gray-300', 'w-1/3'])->placeholder('') }}
     </div>
+
+    <!-- Labels -->
     <div class="mt-2">
         {{ html()->label(__('Labels'), 'labels') }}
     </div>
@@ -30,6 +50,7 @@
         {{ html()->multiselect('labels', $labels)->class(['rounded', 'border-gray-300', 'w-1/3', 'h-32']) }}
     </div>
 
+    <!-- Submit -->
     <div>
         <button
             type="submit"

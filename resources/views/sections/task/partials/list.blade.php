@@ -50,7 +50,7 @@
                                     @method('DELETE')
                                     @csrf
                                     <x-primary-button class="ms-3">
-                                        {{ __('Delete') }}
+                                        {{ __('OK') }}
                                     </x-primary-button>
                                 </form>
                             </div>

@@ -1,11 +1,20 @@
 <div class="flex flex-col">
+
+
+    <!-- Name -->
     <div class="mt-2">
         {{ html()->label(__('Name'), 'name') }}
     </div>
     <div>
         {{ html()->text('name')->class(['rounded', 'border-gray-300', 'w-1/3']) }}
     </div>
+    @error('name')
+    <div class="text-red-600">
+        {{ $message }}
+    </div>
+    @enderror
 
+    <!-- Submit -->
     <div class="mt-2">
         <button
             type="submit"
