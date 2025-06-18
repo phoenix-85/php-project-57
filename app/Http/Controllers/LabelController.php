@@ -21,7 +21,7 @@ class LabelController extends Controller
     public function create()
     {
         $this->authorize('create', Label::class);
-        $label = Label::make();
+        $label = new Label();
         return view('sections.label.create', compact('label'));
     }
 
@@ -34,7 +34,8 @@ class LabelController extends Controller
     public function store(LabelRequest $request)
     {
         $this->authorize('create', Label::class);
-        $label = Label::make($request->validated());
+        $label = new Label();
+        $label->fill($request->validated());
         $label->description = $label->description ?? '';
         $label->save();
         return to_route('labels.index')->with('message', 'Метка успешно создана');
@@ -53,7 +54,7 @@ class LabelController extends Controller
         $this->authorize('delete', $label);
         try {
             $label->delete();
-        } catch (QueryException) {
+        } catch (QueryException $e) {
             return to_route('labels.index')->with('message', 'Не удалось удалить метку');
         }
         return to_route('labels.index')->with('message', 'Метка успешно удалена');

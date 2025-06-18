@@ -42,7 +42,7 @@ class TaskController extends Controller
     public function create()
     {
         $this->authorize('create', Task::class);
-        $task = Task::make();
+        $task = new Task();
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
@@ -60,7 +60,8 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         $this->authorize('create', Task::class);
-        $task = Task::make($request->validated());
+        $task = new Task();
+        $task->fill($request->validated());
         $task->created_by_id = $request->user()->id;
         $task->assigned_to_id = $task->assigned_to_id ?? $request->user()->id;
         $task->save();

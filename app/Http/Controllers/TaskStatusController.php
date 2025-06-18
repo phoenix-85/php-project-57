@@ -21,7 +21,7 @@ class TaskStatusController extends Controller
     public function create()
     {
         $this->authorize('create', TaskStatus::class);
-        $taskStatus = TaskStatus::make();
+        $taskStatus = new TaskStatus();
         return view('sections.task_status.create', compact('taskStatus'));
     }
 
@@ -50,7 +50,7 @@ class TaskStatusController extends Controller
         $this->authorize('delete', $taskStatus);
         try {
             $taskStatus->delete();
-        } catch (QueryException) {
+        } catch (QueryException $e) {
             return to_route('task_statuses.index')->with('message', 'Не удалось удалить статус');
         }
         return to_route('task_statuses.index')->with('message', 'Статус успешно удалён');
