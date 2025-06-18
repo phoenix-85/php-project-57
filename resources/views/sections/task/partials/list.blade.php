@@ -32,24 +32,24 @@
                     @can('delete', $task)
                         <a
                             href="{{ route('tasks.destroy', $task) }}"
-                            onclick="event.preventDefault(); window.confirmDeleteTask.showModal()"
+                            onclick="event.preventDefault(); window.confirmDelete.showModal()"
                             class="text-red-600 hover:text-red-900"
                         >
                             {{__('Delete')}}
                         </a>
-                        <dialog id="confirmDeleteTask" class="py-4 px-4 rounded shadow-sm">
+                        <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
                             <h2 class="font-semibold">Удаление "{{ $task->name }}"</h2>
                             <p class="mt-1">Вы действительно хотите удалить задачу?</p>
                             <div class="flex justify-center mt-4">
-{{--                                <x-secondary-button--}}
-{{--                                    onclick="window.confirmDeleteTask.close()"--}}
-{{--                                >--}}
-{{--                                    {{ __('Cancel') }}--}}
-{{--                                </x-secondary-button>--}}
                                 <form method="POST" action="{{ route('tasks.destroy', $task) }}">
                                     @method('DELETE')
                                     @csrf
-                                    <x-primary-button class="ms-3">
+                                    <x-secondary-button
+                                        onclick="window.confirmDelete.close()"
+                                    >
+                                        {{ __('Cancel') }}
+                                    </x-secondary-button>
+                                    <x-primary-button class="ms-3" autofocus>
                                         {{ __('OK') }}
                                     </x-primary-button>
                                 </form>
