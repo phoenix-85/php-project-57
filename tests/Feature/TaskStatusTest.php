@@ -11,7 +11,7 @@ class TaskStatusTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_create_task_status_page_is_displayed(): void
+    public function testCreateTaskStatusPageIsDisplayed(): void
     {
         $user = User::factory()->create();
 
@@ -23,7 +23,7 @@ class TaskStatusTest extends TestCase
             ->assertOk();
     }
 
-    public function test_task_status_is_created(): void
+    public function testTaskStatusIsCreated(): void
     {
         $user = User::factory()->create();
 

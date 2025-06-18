@@ -11,7 +11,7 @@ class LabelTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_create_label_page_is_displayed(): void
+    public function testCreateLabelPageIsDisplayed(): void
     {
         $user = User::factory()->create();
 
@@ -23,7 +23,7 @@ class LabelTest extends TestCase
             ->assertOk();
     }
 
-    public function test_label_is_created(): void
+    public function testLabelIsCreated(): void
     {
         $user = User::factory()->create();
 

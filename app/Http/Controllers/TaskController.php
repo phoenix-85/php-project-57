@@ -18,7 +18,7 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorize('viewAny',Task::class);
+        $this->authorize('viewAny', Task::class);
         $filter = $request->input('filter') ?? [];
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
@@ -41,12 +41,12 @@ class TaskController extends Controller
 
     public function create()
     {
-        $this->authorize('create',Task::class);
+        $this->authorize('create', Task::class);
         $task = Task::make();
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
-        return view('sections.task.create', compact('task',  'taskStatuses', 'users', 'labels'));
+        return view('sections.task.create', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
     public function edit(Task $task)

@@ -44,7 +44,7 @@ class TaskTest extends TestCase
         $this->task = $this->task->fresh();
     }
 
-    public function test_index_page_is_displayed(): void
+    public function testIndexPageIsDisplayed(): void
     {
         $response = $this->get(route('tasks.index'));
 
@@ -52,7 +52,7 @@ class TaskTest extends TestCase
         $response->assertSee('Test Task');
     }
 
-    public function test_show_page_is_displayed(): void
+    public function testShowPageIsDisplayed(): void
     {
         $response = $this->get(route('tasks.show', $this->task));
 
@@ -61,7 +61,7 @@ class TaskTest extends TestCase
         $response->assertSee('Test Description');
     }
 
-    public function test_create_task_page_is_displayed(): void
+    public function testCreateTaskPageIsDisplayed(): void
     {
         $response = $this
             ->actingAs($this->user)
@@ -70,7 +70,7 @@ class TaskTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_edit_task_page_is_displayed(): void
+    public function testEditTaskPageIsDisplayed(): void
     {
         $response = $this
             ->actingAs($this->user)
@@ -80,7 +80,7 @@ class TaskTest extends TestCase
         $response->assertSee('Test Task');
     }
 
-    public function test_task_is_created(): void
+    public function testTaskIsCreated(): void
     {
         $label = Label::create([
             'name' => 'Test Label',
@@ -105,7 +105,7 @@ class TaskTest extends TestCase
         $response->assertSee('New Task');
     }
 
-    public function test_task_is_updated(): void
+    public function testTaskIsUpdated(): void
     {
         $response = $this
             ->actingAs($this->user)
@@ -125,7 +125,7 @@ class TaskTest extends TestCase
         $response->assertSee('Updated Task');
     }
 
-    public function test_task_is_deleted(): void
+    public function testTaskIsDeleted(): void
     {
         // Create a task specifically for deletion
         $taskToDelete = new Task([
@@ -151,7 +151,7 @@ class TaskTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function test_unauthorized_user_cannot_create_task(): void
+    public function testUnauthorizedUserCannotCreateTask(): void
     {
         $response = $this->post(route('tasks.store'), [
             'name' => 'Unauthorized Task',
@@ -162,7 +162,7 @@ class TaskTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function test_unauthorized_user_cannot_update_task(): void
+    public function testUnauthorizedUserCannotUpdateTask(): void
     {
         $response = $this->patch(route('tasks.update', $this->task), [
             'name' => 'Unauthorized Update',
@@ -173,7 +173,7 @@ class TaskTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function test_unauthorized_user_cannot_delete_task(): void
+    public function testUnauthorizedUserCannotDeleteTask(): void
     {
         // Create a different user
         $anotherUser = User::factory()->create();
@@ -186,7 +186,7 @@ class TaskTest extends TestCase
         $response->assertForbidden();
     }
 
-    public function test_filter_tasks_by_status(): void
+    public function testFilterTasksByStatus(): void
     {
         // Create another task status
         $anotherStatus = TaskStatus::create(['name' => 'In Progress']);
@@ -208,7 +208,7 @@ class TaskTest extends TestCase
         $response->assertDontSee('Another Task');
     }
 
-    public function test_filter_tasks_by_assigned_user(): void
+    public function testFilterTasksByAssignedUser(): void
     {
         // Create another user
         $anotherUser = User::factory()->create();
@@ -230,7 +230,7 @@ class TaskTest extends TestCase
         $response->assertDontSee('Assigned Task');
     }
 
-    public function test_filter_tasks_by_creator(): void
+    public function testFilterTasksByCreator(): void
     {
         // Create another user
         $anotherUser = User::factory()->create();
