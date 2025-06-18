@@ -29,11 +29,11 @@
                         <h2 class="font-semibold">Удаление "{{ $label->name }}"</h2>
                         <p class="mt-1">Вы действительно хотите удалить метку?</p>
                         <div class="flex justify-center mt-4">
-                            <x-secondary-button
-                                onclick="window.confirmDeleteLabel.close()"
-                            >
-                                {{ __('Cancel') }}
-                            </x-secondary-button>
+{{--                            <x-secondary-button--}}
+{{--                                onclick="window.confirmDeleteLabel.close()"--}}
+{{--                            >--}}
+{{--                                {{ __('Cancel') }}--}}
+{{--                            </x-secondary-button>--}}
                             <form method="POST" action="{{ route('labels.destroy', $label) }}">
                                 @method('DELETE')
                                 @csrf

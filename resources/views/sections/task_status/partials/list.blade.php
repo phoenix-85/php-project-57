@@ -27,11 +27,11 @@
                         <h2 class="font-semibold">Удаление "{{ $taskStatus->name }}"</h2>
                         <p class="mt-1">Вы действительно хотите удалить статус?</p>
                         <div class="flex justify-center mt-4">
-                            <x-secondary-button
-                                onclick="window.confirmDeleteStatus.close()"
-                            >
-                                {{ __('Cancel') }}
-                            </x-secondary-button>
+{{--                            <x-secondary-button--}}
+{{--                                onclick="window.confirmDeleteStatus.close()"--}}
+{{--                            >--}}
+{{--                                {{ __('Cancel') }}--}}
+{{--                            </x-secondary-button>--}}
                             <form method="POST" action="{{ route('task_statuses.destroy', $taskStatus) }}">
                                 @method('DELETE')
                                 @csrf
