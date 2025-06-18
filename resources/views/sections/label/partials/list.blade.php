@@ -20,35 +20,28 @@
                 <td>
                     <a
                         href="{{ route('labels.destroy', $label) }}"
-                        onclick="event.preventDefault(); window.confirmDelete.showModal()"
+                        onclick="
+                            event.preventDefault();
+                            result = confirm('Вы действительно хотите удалить метку?');
+                            if (result) {
+                                form = document.getElementById('deleteForm');
+                                form.action = '{{ route('labels.destroy', $label) }}';
+                                form.submit();
+                            }"
                         class="text-red-600 hover:text-red-900"
                     >
-                        {{__('Delete')}}
+                        {{ __('Delete') }}
                     </a>
-                    <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm" role="alertdialog">
-                        <h2 class="font-semibold">Удаление "{{ $label->name }}"</h2>
-                        <p class="mt-1">Вы действительно хотите удалить метку?</p>
-                        <div class="flex justify-center mt-4">
-                            <form method="POST" action="{{ route('labels.destroy', $label) }}">
-                                @method('DELETE')
-                                @csrf
-                                <x-secondary-button
-                                    onclick="window.confirmDelete.close()"
-                                >
-                                    {{ __('Cancel') }}
-                                </x-secondary-button>
-                                <x-primary-button class="ms-3">
-                                    {{ __('OK') }}
-                                </x-primary-button>
-                            </form>
-                        </div>
-                    </dialog>
                     <a
                         href="{{ route('labels.edit', $label) }}"
                         class="text-blue-600 hover:text-blue-900"
                     >
                         {{ __('Edit') }}
                     </a>
+                    <form id="deleteForm" method="POST" action="{{ route('labels.destroy', $label) }}">
+                        @method('DELETE')
+                        @csrf
+                    </form>
                 </td>
             @endauth
         </tr>

@@ -32,29 +32,22 @@
                     @can('delete', $task)
                         <a
                             href="{{ route('tasks.destroy', $task) }}"
-                            onclick="event.preventDefault(); window.confirmDelete.showModal()"
+                            onclick="
+                            event.preventDefault();
+                            result = confirm('Вы действительно хотите удалить задачу?');
+                            if (result) {
+                                form = document.getElementById('deleteForm');
+                                form.action = '{{ route('tasks.destroy', $task) }}';
+                                form.submit();
+                            }"
                             class="text-red-600 hover:text-red-900"
                         >
-                            {{__('Delete')}}
+                            {{ __('Delete') }}
                         </a>
-                        <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm" role="alertdialog">
-                            <h2 class="font-semibold">Удаление "{{ $task->name }}"</h2>
-                            <p class="mt-1">Вы действительно хотите удалить задачу?</p>
-                            <div class="flex justify-center mt-4">
-                                <form method="POST" action="{{ route('tasks.destroy', $task) }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <x-secondary-button
-                                        onclick="window.confirmDelete.close()"
-                                    >
-                                        {{ __('Cancel') }}
-                                    </x-secondary-button>
-                                    <x-primary-button class="ms-3" value="confirm">
-                                        {{ __('OK') }}
-                                    </x-primary-button>
-                                </form>
-                            </div>
-                        </dialog>
+                        <form id="deleteForm" method="POST" action="{{ route('tasks.destroy', $task) }}">
+                            @method('DELETE')
+                            @csrf
+                        </form>
                     @endcan
                     <a
                         href="{{ route('tasks.edit', $task) }}"
