@@ -54,7 +54,7 @@ class LabelController extends Controller
         $this->authorize('delete', $label);
         try {
             $label->delete();
-        } catch (QueryException $e) {
+        } catch (\Exception) {
             return to_route('labels.index')->with('message', 'Не удалось удалить метку');
         }
         return to_route('labels.index')->with('message', 'Метка успешно удалена');
