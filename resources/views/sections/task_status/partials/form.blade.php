@@ -10,7 +10,11 @@
     </div>
     @error('name')
     <div class="text-red-600">
-        {{ $message }}
+        @if (str_contains($message, 'name'))
+            {{ 'Статус с таким именем уже существует.' }}
+        @else
+            {{ $message }}
+        @endif
     </div>
     @enderror
 
