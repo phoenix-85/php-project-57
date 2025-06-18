@@ -32,16 +32,16 @@ class TaskPolicy
 
     public function delete(User $user, Task $task): bool
     {
-        return $user === $task->createdBy;
+        return $task->createdBy->is($user);
     }
 
     public function restore(User $user, Task $task): bool
     {
-        return $user === $task->createdBy;
+        return $task->createdBy->is($user);
     }
 
     public function forceDelete(User $user, Task $task): bool
     {
-        return $user === $task->createdBy;
+        return $task->createdBy->is($user);
     }
 }
