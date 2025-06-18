@@ -30,13 +30,13 @@
             @auth
                 <td>
                     @can('delete', $task)
-                        <button
-                            type="button"
-                            onclick="window.confirmDelete.showModal()"
+                        <a
+                            href="{{ route('tasks.destroy', $task) }}"
+                            onclick="event.preventDefault(); window.confirmDelete.showModal()"
                             class="text-red-600 hover:text-red-900"
                         >
                             {{__('Delete')}}
-                        </button>
+                        </a>
                         <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
                             <h2 class="font-semibold">Удаление "{{ $task->name }}"</h2>
                             <p class="mt-1">Вы действительно хотите удалить задачу?</p>

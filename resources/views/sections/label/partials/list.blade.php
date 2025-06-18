@@ -18,16 +18,31 @@
             <td>{{ $label->created_at->format('d.m.Y') }}</td>
             @auth
                 <td>
-                    <form method="POST" action="{{ route('labels.destroy', $label) }}">
-                        @method('DELETE')
-                        @csrf
-                        <button
-                            type="submit"
-                            class="text-red-600 hover:text-red-900"
-                        >
-                            {{ __('Delete') }}
-                        </button>
-                    </form>
+                    <a
+                        href="{{ route('labels.destroy', $label) }}"
+                        onclick="event.preventDefault(); window.confirmDelete.showModal()"
+                        class="text-red-600 hover:text-red-900"
+                    >
+                        {{__('Delete')}}
+                    </a>
+                    <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
+                        <h2 class="font-semibold">Удаление "{{ $label->name }}"</h2>
+                        <p class="mt-1">Вы действительно хотите удалить метку?</p>
+                        <div class="flex justify-center mt-4">
+                            <x-secondary-button
+                                onclick="window.confirmDelete.close()"
+                            >
+                                {{ __('Cancel') }}
+                            </x-secondary-button>
+                            <form method="POST" action="{{ route('labels.destroy', $label) }}">
+                                @method('DELETE')
+                                @csrf
+                                <x-primary-button class="ms-3">
+                                    {{ __('Delete') }}
+                                </x-primary-button>
+                            </form>
+                        </div>
+                    </dialog>
                     <a
                         href="{{ route('labels.edit', $label) }}"
                         class="text-blue-600 hover:text-blue-900"

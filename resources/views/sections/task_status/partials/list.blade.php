@@ -16,16 +16,31 @@
             <td>{{ $taskStatus->created_at->format('d.m.Y') }}</td>
             @auth
                 <td>
-                    <form method="POST" action="{{ route('task_statuses.destroy', $taskStatus) }}">
-                        @method('DELETE')
-                        @csrf
-                        <button
-                            type="submit"
-                            class="text-red-600 hover:text-red-900"
-                        >
-                            {{ __('Delete') }}
-                        </button>
-                    </form>
+                    <a
+                        href="{{ route('task_statuses.destroy', $taskStatus) }}"
+                        onclick="event.preventDefault(); window.confirmDelete.showModal()"
+                        class="text-red-600 hover:text-red-900"
+                    >
+                        {{__('Delete')}}
+                    </a>
+                    <dialog id="confirmDelete" class="py-4 px-4 rounded shadow-sm">
+                        <h2 class="font-semibold">Удаление "{{ $taskStatus->name }}"</h2>
+                        <p class="mt-1">Вы действительно хотите удалить статус?</p>
+                        <div class="flex justify-center mt-4">
+                            <x-secondary-button
+                                onclick="window.confirmDelete.close()"
+                            >
+                                {{ __('Cancel') }}
+                            </x-secondary-button>
+                            <form method="POST" action="{{ route('task_statuses.destroy', $taskStatus) }}">
+                                @method('DELETE')
+                                @csrf
+                                <x-primary-button class="ms-3">
+                                    {{ __('Delete') }}
+                                </x-primary-button>
+                            </form>
+                        </div>
+                    </dialog>
                     <a
                         href="{{ route('task_statuses.edit', $taskStatus) }}"
                         class="text-blue-600 hover:text-blue-900"
